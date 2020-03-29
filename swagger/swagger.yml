@@ -1,0 +1,664 @@
+swagger: "2.0"
+info:
+  title: beego Test API
+  description: beego has a very cool tools to autogenerate documents for your API
+  version: 1.0.0
+  termsOfService: http://beego.me/
+  contact:
+    email: astaxie@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+paths:
+  /Announcement/{aid}:
+    get:
+      tags:
+      - Announcement
+      description: 获取单个公告
+      operationId: AnnouncementController.获取单个公告
+      parameters:
+      - in: path
+        name: aid
+        description: 获取单个公告的id
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: body is empty
+  /Announcement/{uid}:
+    put:
+      tags:
+      - Announcement
+      description: 更新公告
+      operationId: AnnouncementController.Update Announcement
+      parameters:
+      - in: path
+        name: uid
+        description: 更新公告id
+        type: integer
+        format: int64
+      - in: body
+        name: body
+        description: 更新请求体
+        schema:
+          $ref: '#/definitions/controllers.UpdateRequest'
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: body is empty
+  /Announcement/addannouncement:
+    post:
+      tags:
+      - Announcement
+      description: 添加公告
+      operationId: AnnouncementController.添加公告
+      parameters:
+      - in: formData
+        name: req
+        description: 增加请求(json格式字符串)
+        type: string
+      - in: formData
+        name: image
+        description: 本地图片地址
+        type: file
+      - in: formData
+        name: file
+        description: 本地文件地址
+        type: file
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /Announcement/delete/{id}:
+    delete:
+      tags:
+      - Announcement
+      description: 删除公告
+      operationId: AnnouncementController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: 删除公告id
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: body is empty
+  /Announcement/getall:
+    get:
+      tags:
+      - Announcement
+      description: 获取所有公告
+      operationId: AnnouncementController.获取所有公告
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: body is empty
+  /Announcement/read:
+    get:
+      tags:
+      - Announcement
+      description: 获取已读公告
+      operationId: AnnouncementController.获取已读公告
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: body is empty
+  /Announcement/unread:
+    get:
+      tags:
+      - Announcement
+      description: 获取未读公告
+      operationId: AnnouncementController.获取未读读公告
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: body is empty
+  /birthday/addbirthday:
+    post:
+      tags:
+      - birthday
+      description: 添加庆生申请
+      operationId: BirthdayController.添加庆生申请
+      parameters:
+      - in: body
+        name: body
+        description: 庆生请求
+        schema:
+          $ref: '#/definitions/controllers.BirthdayRequest'
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /birthday/pass/{id}:
+    put:
+      tags:
+      - birthday
+      description: 通过庆生申请
+      operationId: BirthdayController.通过庆生申请
+      parameters:
+      - in: path
+        name: id
+        description: 庆生申请id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /birthday/reject/{id}:
+    put:
+      tags:
+      - birthday
+      description: 拒绝庆生申请
+      operationId: BirthdayController.拒绝庆生申请
+      parameters:
+      - in: path
+        name: id
+        description: 庆生申请id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /exercise/createteam:
+    post:
+      tags:
+      - exercise
+      description: 创建队伍
+      operationId: ExerciseController.创建队伍
+      parameters:
+      - in: body
+        name: body
+        description: 创建请求
+        schema:
+          $ref: '#/definitions/controllers.CreateRequest'
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /exercise/exerciseclock:
+    post:
+      tags:
+      - exercise
+      description: 锻炼打卡
+      operationId: ExerciseController.锻炼打卡
+      parameters:
+      - in: body
+        name: body
+        description: 打卡请求
+        schema:
+          $ref: '#/definitions/controllers.ClockRequest'
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /exercise/getrecords/{name}:
+    get:
+      tags:
+      - exercise
+      description: 获取打卡记录
+      operationId: ExerciseController.获取记录
+      parameters:
+      - in: path
+        name: name
+        description: 用户名
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /exercise/grouplist:
+    get:
+      tags:
+      - exercise
+      description: 获取队伍列表
+      operationId: ExerciseController.获取队伍列表
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /exercise/join/{uid}/{tid}:
+    put:
+      tags:
+      - exercise
+      description: 加入队伍请求
+      operationId: ExerciseController.加入队伍
+      parameters:
+      - in: path
+        name: uid
+        description: 加入队伍用户的id
+        type: integer
+        format: int64
+      - in: path
+        name: tid
+        description: 加入队伍的id
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /exercise/out/{uid}/{tid}:
+    put:
+      tags:
+      - exercise
+      description: 取消组队
+      operationId: ExerciseController.取消组队
+      parameters:
+      - in: path
+        name: uid
+        description: 取消组队的用户id
+        type: integer
+        format: int64
+      - in: path
+        name: tid
+        description: 取消组队的队伍id
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /reimbursement/{name}:
+    get:
+      tags:
+      - reimbursement
+      description: 获取报销记录
+      operationId: ReimbursementController.获取用户报销记录
+      parameters:
+      - in: path
+        name: name
+        description: 申请人
+        type: string
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /reimbursement/{option}:
+    get:
+      tags:
+      - reimbursement
+      description: 拒绝报销申请
+      operationId: ReimbursementController.拒绝报销申请
+      parameters:
+      - in: path
+        name: option
+        description: 审批选项
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /reimbursement/addapplication:
+    post:
+      tags:
+      - reimbursement
+      description: 添加经费申请
+      operationId: ReimbursementController.添加经费申请
+      parameters:
+      - in: body
+        name: body
+        description: 申请请求
+        schema:
+          $ref: '#/definitions/controllers.ReimRequest'
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /reimbursement/getallrecords:
+    get:
+      tags:
+      - reimbursement
+      description: 获取报销记录
+      operationId: ReimbursementController.获取所有报销记录
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /reimbursement/pass/{id}:
+    put:
+      tags:
+      - reimbursement
+      description: 通过报销申请
+      operationId: ReimbursementController.通过报销申请
+      parameters:
+      - in: path
+        name: id
+        description: 通过申请id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /reimbursement/reject/{id}:
+    put:
+      tags:
+      - reimbursement
+      description: 拒绝报销申请
+      operationId: ReimbursementController.拒绝报销申请
+      parameters:
+      - in: path
+        name: id
+        description: 拒绝申请id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /resignation/application:
+    post:
+      tags:
+      - resignation
+      description: 离职申请
+      operationId: ResignationController.离职申请
+      parameters:
+      - in: body
+        name: body
+        description: 离职请求
+        schema:
+          $ref: '#/definitions/controllers.ResignationRequest'
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /training/{id}:
+    delete:
+      tags:
+      - training
+      description: 删除培训资料
+      operationId: TrainingController.删除资料
+      parameters:
+      - in: path
+        name: id
+        description: 所删除资料的id
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /training/addtraining:
+    post:
+      tags:
+      - training
+      description: 添加培训
+      operationId: TrainingController.添加培训
+      parameters:
+      - in: formData
+        name: req
+        description: 添加请求
+        type: string
+      - in: formData
+        name: image
+        description: 图片
+        type: file
+      - in: formData
+        name: file
+        description: 文件
+        type: file
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /training/getalldata:
+    get:
+      tags:
+      - training
+      description: 获取所有培训资料
+      operationId: TrainingController.获取所有资料
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /travel/addtravel:
+    post:
+      tags:
+      - travel
+      description: 添加出游申请
+      operationId: TravelController.添加出游申请
+      parameters:
+      - in: body
+        name: body
+        description: 出游请求
+        schema:
+          $ref: '#/definitions/controllers.TravelRequest'
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /vehicle/{name}:
+    post:
+      tags:
+      - vehicle
+      description: 获取用户申请记录
+      operationId: VehicleController.获取用户申请记录
+      parameters:
+      - in: path
+        name: name
+        description: 申请人
+        type: string
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /vehicle/application:
+    post:
+      tags:
+      - vehicle
+      description: 添加用车申请
+      operationId: VehicleController.添加用车申请
+      parameters:
+      - in: body
+        name: body
+        description: 申请请求
+        schema:
+          $ref: '#/definitions/controllers.ApplyRequest'
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /vehicle/pass/{id}:
+    put:
+      tags:
+      - vehicle
+      description: 通过车辆申请
+      operationId: VehicleController.通过车辆申请
+      parameters:
+      - in: path
+        name: id
+        description: 车辆申请id
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /vehicle/reject/{id}:
+    put:
+      tags:
+      - vehicle
+      description: 拒绝车辆申请
+      operationId: VehicleController.拒绝车辆申请
+      parameters:
+      - in: path
+        name: id
+        description: 车辆申请id
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+definitions:
+  controllers.ApplyRequest:
+    title: ApplyRequest
+    type: object
+    properties:
+      applicant:
+        type: string
+      applydate:
+        type: string
+      destination:
+        type: string
+      record:
+        type: string
+      usetime:
+        type: string
+  controllers.BirthdayRequest:
+    title: BirthdayRequest
+    type: object
+    properties:
+      date:
+        type: string
+      destination:
+        type: string
+      name:
+        type: string
+  controllers.ClockRequest:
+    title: ClockRequest
+    type: object
+    properties:
+      begintime:
+        type: string
+      date:
+        type: string
+      endtime:
+        type: string
+      item:
+        type: string
+      username:
+        type: string
+  controllers.CreateRequest:
+    title: CreateRequest
+    type: object
+    properties:
+      count:
+        type: integer
+        format: int64
+      groupname:
+        type: string
+  controllers.ReimRequest:
+    title: ReimRequest
+    type: object
+    properties:
+      applicant:
+        type: string
+      date:
+        type: string
+      record:
+        type: string
+      sum:
+        type: integer
+        format: int64
+      usefor:
+        type: string
+  controllers.ResignationRequest:
+    title: ResignationRequest
+    type: object
+    properties:
+      date:
+        type: string
+      handover_person:
+        type: string
+      handover_work:
+        type: string
+      name:
+        type: string
+      reason:
+        type: string
+      resignationtime:
+        type: string
+  controllers.TravelRequest:
+    title: TravelRequest
+    type: object
+    properties:
+      apply_date:
+        type: string
+      destination:
+        type: string
+      name:
+        type: string
+      staff_list:
+        type: string
+      travel_time:
+        type: string
+  controllers.UpdateRequest:
+    title: UpdateRequest
+    type: object
+    properties:
+      content:
+        type: string
+      publisher:
+        type: string
+      title:
+        type: string
+tags:
+- name: Announcement
+  description: |
+    Announcement 公告控制器
+- name: exercise
+  description: |
+    ExerciseController 锻炼小组控制器
+- name: resignation
+  description: |
+    离职
+- name: reimbursement
+  description: |
+    经费报销
+- name: vehicle
+  description: |
+    车辆申请
+- name: travel
+  description: |
+    出游申请
+- name: birthday
+  description: |
+    庆生申请
+- name: training
+  description: |
+    教育培训
