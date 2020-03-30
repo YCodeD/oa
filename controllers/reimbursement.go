@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"oa/models"
 )
 
@@ -32,15 +33,16 @@ type ReimRequest struct {
 func (r *ReimbursementController) AddApplication() {
 	req := &ReimRequest{}
 	json.Unmarshal(r.Ctx.Input.RequestBody, &req)
-	res := models.CreateReimbursement(&models.Reimbursement{
+	err := models.CreateReimbursement(&models.Reimbursement{
 		Applicant: req.Applicant,
 		Sum:       req.Sum,
 		UseFor:    req.UseFor,
 		Date:      req.Date,
 		Record:    req.Record,
 	})
-
-	r.Response(res)
+	if err != nil {
+		r.ResponseError(err)
+	}
 }
 
 // @Title 获取用户报销记录
@@ -74,7 +76,7 @@ func (r *ReimbursementController) GetAllRecord() {
 func (r *ReimbursementController) PassReimbursement() {
 	id := r.GetPathInt("id")
 	reim := models.FetchReimById(id)
-	reim.Approval = 1
+	reim.Status = 1
 	res := models.UpdateReimbursement(reim)
 	r.Response(res)
 }
@@ -88,19 +90,20 @@ func (r *ReimbursementController) PassReimbursement() {
 func (r *ReimbursementController) RejectReimbursement() {
 	id := r.GetPathInt("id")
 	reim := models.FetchReimById(id)
-	reim.Approval = 2
+	reim.Status = 2
 	res := models.UpdateReimbursement(reim)
 	r.Response(res)
 }
 
-// @Title 拒绝报销申请
-// @Description 拒绝报销申请
-// @Param option path int true "审批选项"
+// @Title 获取报销申请
+// @Description 获取审批流程的报销申请
+// @Param option path int true "审批选项 0-未审批  1-已通过  2-未通过"
 // @Success 200
 // @Failure 403
 // @router /:option [get]
 func (r *ReimbursementController) GetByOption() {
 	option := r.GetPathInt("option")
-	res := models.FetchByOption(option)
+	fmt.Printf("option: %v \n", option)
+	res := models.FetchReimByOption(option)
 	r.Response(res)
 }

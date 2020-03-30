@@ -14,7 +14,7 @@ type Training struct {
 // 添加培训资料
 func CreateTraining(ct *Training) error {
 	err := db.Create(&ct).Error
-	if err!=nil {
+	if err != nil {
 		return err
 	}
 	return nil

@@ -1,6 +1,10 @@
 package models
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"time"
+)
 
 type Reimbursement struct {
 	ID int `json:"id"`
@@ -15,20 +19,32 @@ type Reimbursement struct {
 	// 经费记录
 	Record string `json:"record"`
 	// 审批 0-未审批  1-已通过  2-未通过
-	Approval int `json:"approval" gorm:"default:0"`
+	Status int `json:"status" gorm:"default:0"`
 }
 
 // CreateReimbursement 添加报销申请
-func CreateReimbursement(cr *Reimbursement) Reimbursement {
+func CreateReimbursement(cr *Reimbursement) error {
+	_, err := time.ParseInLocation("2006-01-02", cr.Date, time.Local)
+	if err != nil {
+		return errors.New("Date必须是2006-01-02的时间格式")
+	}
 	db.Create(&cr)
-	return *cr
+	return nil
 }
 
 // UpdateReimbursement 更新报销记录
 func UpdateReimbursement(ur *Reimbursement) Reimbursement {
 	db.Save(&ur)
-	fmt.Printf("update %v", ur)
+	//fmt.Printf("update %v", ur)
 	return *ur
+}
+
+// FetchByOption 通过选项获取申请
+func FetchReimByOption(option int) []Reimbursement {
+	res := []Reimbursement{}
+	fmt.Printf("FetchByOption  \n")
+	db.Where("status=?", option).Find(&res)
+	return res
 }
 
 // FetchReimByName 获取用户报销记录
@@ -50,12 +66,5 @@ func FetchReimById(id int) *Reimbursement {
 func FetchAllReimRecords() []Reimbursement {
 	res := []Reimbursement{}
 	db.Find(&res)
-	return res
-}
-
-// FetchByOption 通过选项获取申请
-func FetchByOption(option int) []Reimbursement {
-	res := []Reimbursement{}
-	db.Where("approval=?", option).Find(&res)
 	return res
 }

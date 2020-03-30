@@ -10,6 +10,7 @@ type VehicleController struct {
 	BaseController
 }
 
+// ApplyRequest 添加请求
 type ApplyRequest struct {
 	// 申请人
 	Name string `json:"applicant"`
@@ -62,7 +63,7 @@ func (v *VehicleController) GetVehicleRecords() {
 func (v *VehicleController) PassVehicle() {
 	id := v.GetPathInt("id")
 	vehicle := models.FetchVehicleById(id)
-	vehicle.Approval = 1
+	vehicle.Status = 1
 	res := models.UpdateVehicle(&vehicle)
 	v.Response(res)
 }
@@ -76,7 +77,7 @@ func (v *VehicleController) PassVehicle() {
 func (v *VehicleController) RejectVehicle() {
 	id := v.GetPathInt("id")
 	vehicle := models.FetchVehicleById(id)
-	vehicle.Approval = 2
+	vehicle.Status = 2
 	res := models.UpdateVehicle(&vehicle)
 	v.Response(res)
 }

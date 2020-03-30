@@ -57,7 +57,7 @@ func init() {
 				&controllers.BirthdayController{},
 			),
 		),
-		// 庆生申请
+		// 教育培训申请
 		beego.NSNamespace("/training",
 			beego.NSInclude(
 				&controllers.TrainingController{},

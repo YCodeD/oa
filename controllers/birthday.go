@@ -43,7 +43,7 @@ func (b *BirthdayController) AddBirthday() {
 func (b *BirthdayController) PassBirthday() {
 	id := b.GetPathInt("id")
 	birth := models.FetchBirthdayById(id)
-	birth.Approval = 1
+	birth.Status = 1
 	res := models.UpdateBirthday(birth)
 	b.Response(res)
 }
@@ -57,7 +57,7 @@ func (b *BirthdayController) PassBirthday() {
 func (b *BirthdayController) RejectBirthday() {
 	id := b.GetPathInt("id")
 	birth := models.FetchBirthdayById(id)
-	birth.Approval = 2
+	birth.Status = 2
 	res := models.UpdateBirthday(birth)
 	b.Response(res)
 }

@@ -13,8 +13,9 @@ type Vehicle struct {
 	// 申请记录
 	Record string `json:"record"`
 	// 审批 0-未审批  1-已通过  2-未通过
-	Approval int `json:"approval" gorm:"default:0"`
+	Status int `json:"status" gorm:"default:0"`
 }
+
 
 func CreateVehicle(vehicle *Vehicle) {
 	db.Create(&vehicle)

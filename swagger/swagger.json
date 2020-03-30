@@ -561,13 +561,13 @@
                 "tags": [
                     "reimbursement"
                 ],
-                "description": "拒绝报销申请",
-                "operationId": "ReimbursementController.拒绝报销申请",
+                "description": "获取审批流程的报销申请",
+                "operationId": "ReimbursementController.获取报销申请",
                 "parameters": [
                     {
                         "in": "path",
                         "name": "option",
-                        "description": "审批选项",
+                        "description": "审批选项 0-未审批  1-已通过  2-未通过",
                         "required": true,
                         "type": "integer",
                         "format": "int64"

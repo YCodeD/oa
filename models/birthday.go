@@ -11,7 +11,7 @@ type Birthday struct {
 	// 活动地点
 	Destination string `json:"destination"`
 	// 审批 0-未审批  1-已通过  2-未通过
-	Approval int `json:"approval" gorm:"default:0"`
+	Status int `json:"status" gorm:"default:0"`
 }
 
 // 添加生日申请

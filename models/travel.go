@@ -12,7 +12,7 @@ type Travel struct {
 	// 人员名单
 	StaffList string `json:"staff_list"`
 	// 审批 0-未审批  1-已通过  2-未通过
-	Approval int `json:"approval" gorm:"default:0"`
+	Status int `json:"status" gorm:"default:0"`
 }
 
 // 添加出游申请

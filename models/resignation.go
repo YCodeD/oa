@@ -1,7 +1,7 @@
 package models
 
 type Resignation struct {
-	ID int
+	ID int `json:"id"`
 	// 申请人
 	ApplicantName string `json:"applicant_name"`
 	// 申请日期
@@ -15,7 +15,7 @@ type Resignation struct {
 	// 交接事项
 	HandoverWork string `json:"handover_work"`
 	// 审批 0-未审批  1-已审批  2-未通过  3-已通过
-	Approval int `json:"approval" gorm:"default:0"`
+	Status int `json:"status" gorm:"default:0"`
 }
 
 // CreateResignation 添加离职申请
