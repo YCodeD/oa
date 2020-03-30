@@ -171,8 +171,8 @@ func init() {
 
     beego.GlobalControllerRouter["oa/controllers:ReimbursementController"] = append(beego.GlobalControllerRouter["oa/controllers:ReimbursementController"],
         beego.ControllerComments{
-            Method: "AddApplication",
-            Router: `/addapplication`,
+            Method: "AddReim",
+            Router: `/addreimbursement`,
             AllowHTTPMethods: []string{"post"},
             MethodParams: param.Make(),
             Filters: nil,
@@ -180,8 +180,8 @@ func init() {
 
     beego.GlobalControllerRouter["oa/controllers:ReimbursementController"] = append(beego.GlobalControllerRouter["oa/controllers:ReimbursementController"],
         beego.ControllerComments{
-            Method: "GetAllRecord",
-            Router: `/getallrecords`,
+            Method: "GetAllReims",
+            Router: `/allrecords`,
             AllowHTTPMethods: []string{"get"},
             MethodParams: param.Make(),
             Filters: nil,

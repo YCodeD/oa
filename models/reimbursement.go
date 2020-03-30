@@ -39,7 +39,7 @@ func UpdateReimbursement(ur *Reimbursement) Reimbursement {
 	return *ur
 }
 
-// FetchByOption 通过选项获取申请
+// FetchReimByOption 通过选项获取申请
 func FetchReimByOption(option int) []Reimbursement {
 	res := []Reimbursement{}
 	fmt.Printf("FetchByOption  \n")
@@ -47,9 +47,10 @@ func FetchReimByOption(option int) []Reimbursement {
 	return res
 }
 
-// FetchReimByName 获取用户报销记录
+// FetchReimByName 通过名字获取用户报销记录
 func FetchReimByName(name string) []Reimbursement {
 	res := []Reimbursement{}
+	fmt.Printf("FetchByName  \n")
 	db.Where("applicant=?", name).Find(&res)
 	return res
 }
@@ -58,7 +59,7 @@ func FetchReimByName(name string) []Reimbursement {
 func FetchReimById(id int) *Reimbursement {
 	res := Reimbursement{}
 	db.Where("id=?", id).First(&res)
-	fmt.Printf(" by id %v \n", res)
+	//fmt.Printf(" by id %v \n", res)
 	return &res
 }
 

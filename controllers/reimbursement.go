@@ -17,7 +17,7 @@ type ReimRequest struct {
 	// 金额
 	Sum int `json:"sum"`
 	// 用途
-	UseFor string `json:"usefor"`
+	UseFor string `json:"use_for"`
 	// 申请日期
 	Date string `json:"date"`
 	// 经费记录
@@ -29,8 +29,8 @@ type ReimRequest struct {
 // @Param body body controllers.ReimRequest "申请请求"
 // @Success 200
 // @Failure 403
-// @router /addapplication [post]
-func (r *ReimbursementController) AddApplication() {
+// @router /addreimbursement [post]
+func (r *ReimbursementController) AddReim() {
 	req := &ReimRequest{}
 	json.Unmarshal(r.Ctx.Input.RequestBody, &req)
 	err := models.CreateReimbursement(&models.Reimbursement{
@@ -43,6 +43,19 @@ func (r *ReimbursementController) AddApplication() {
 	if err != nil {
 		r.ResponseError(err)
 	}
+}
+
+// @Title 获取报销申请
+// @Description 获取审批流程的报销申请
+// @Param option path int true "审批选项 0-未审批  1-已通过  2-未通过"
+// @Success 200
+// @Failure 403
+// @router /:option [get]
+func (r *ReimbursementController) GetByOption() {
+	option := r.GetPathInt("option")
+	fmt.Printf("option: %#v \n", option)
+	res := models.FetchReimByOption(option)
+	r.Response(res)
 }
 
 // @Title 获取用户报销记录
@@ -61,8 +74,8 @@ func (r *ReimbursementController) GetReimRecord() {
 // @Description 获取报销记录
 // @Success 200
 // @Failure 403
-// @router /getallrecords [get]
-func (r *ReimbursementController) GetAllRecord() {
+// @router /allrecords [get]
+func (r *ReimbursementController) GetAllReims() {
 	res := models.FetchAllReimRecords()
 	r.Response(res)
 }
@@ -95,15 +108,4 @@ func (r *ReimbursementController) RejectReimbursement() {
 	r.Response(res)
 }
 
-// @Title 获取报销申请
-// @Description 获取审批流程的报销申请
-// @Param option path int true "审批选项 0-未审批  1-已通过  2-未通过"
-// @Success 200
-// @Failure 403
-// @router /:option [get]
-func (r *ReimbursementController) GetByOption() {
-	option := r.GetPathInt("option")
-	fmt.Printf("option: %v \n", option)
-	res := models.FetchReimByOption(option)
-	r.Response(res)
-}
+

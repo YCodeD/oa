@@ -317,7 +317,7 @@ paths:
           description: ""
         "403":
           description: ""
-  /reimbursement/addapplication:
+  /reimbursement/addreimbursement:
     post:
       tags:
       - reimbursement
@@ -334,7 +334,7 @@ paths:
           description: ""
         "403":
           description: ""
-  /reimbursement/getallrecords:
+  /reimbursement/allrecords:
     get:
       tags:
       - reimbursement
@@ -595,7 +595,7 @@ definitions:
       sum:
         type: integer
         format: int64
-      usefor:
+      use_for:
         type: string
   controllers.ResignationRequest:
     title: ResignationRequest

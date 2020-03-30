@@ -16,22 +16,25 @@ type Vehicle struct {
 	Status int `json:"status" gorm:"default:0"`
 }
 
-
+// CreateVehicle 添加用车申请
 func CreateVehicle(vehicle *Vehicle) {
 	db.Create(&vehicle)
 }
 
+// UpdateVehicle 更新用车申请
 func UpdateVehicle(uv *Vehicle) Vehicle {
 	db.Save(&uv)
 	return *uv
 }
 
+// FetchVehicleByName 通过名字获取申请记录
 func FetchVehicleByName(name string) []Vehicle {
 	res := []Vehicle{}
 	db.Where("name=?", name).Find(&res)
 	return res
 }
 
+// FetchVehicleById 通过id获取用车申请
 func FetchVehicleById(id int) Vehicle {
 	res := Vehicle{}
 	db.Where("id=?", id).First(&res)

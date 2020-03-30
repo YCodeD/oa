@@ -433,7 +433,7 @@
                 }
             }
         },
-        "/reimbursement/addapplication": {
+        "/reimbursement/addreimbursement": {
             "post": {
                 "tags": [
                     "reimbursement"
@@ -460,7 +460,7 @@
                 }
             }
         },
-        "/reimbursement/getallrecords": {
+        "/reimbursement/allrecords": {
             "get": {
                 "tags": [
                     "reimbursement"
@@ -910,7 +910,7 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "usefor": {
+                "use_for": {
                     "type": "string"
                 }
             }
