@@ -153,15 +153,6 @@ func init() {
 
     beego.GlobalControllerRouter["oa/controllers:ReimbursementController"] = append(beego.GlobalControllerRouter["oa/controllers:ReimbursementController"],
         beego.ControllerComments{
-            Method: "GetReimRecord",
-            Router: `/:name`,
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["oa/controllers:ReimbursementController"] = append(beego.GlobalControllerRouter["oa/controllers:ReimbursementController"],
-        beego.ControllerComments{
             Method: "GetByOption",
             Router: `/:option`,
             AllowHTTPMethods: []string{"get"},
@@ -172,7 +163,7 @@ func init() {
     beego.GlobalControllerRouter["oa/controllers:ReimbursementController"] = append(beego.GlobalControllerRouter["oa/controllers:ReimbursementController"],
         beego.ControllerComments{
             Method: "AddReim",
-            Router: `/addreimbursement`,
+            Router: `/add`,
             AllowHTTPMethods: []string{"post"},
             MethodParams: param.Make(),
             Filters: nil,
@@ -181,7 +172,7 @@ func init() {
     beego.GlobalControllerRouter["oa/controllers:ReimbursementController"] = append(beego.GlobalControllerRouter["oa/controllers:ReimbursementController"],
         beego.ControllerComments{
             Method: "GetAllReims",
-            Router: `/allrecords`,
+            Router: `/allReims`,
             AllowHTTPMethods: []string{"get"},
             MethodParams: param.Make(),
             Filters: nil,
@@ -210,6 +201,24 @@ func init() {
             Method: "AddApplication",
             Router: `/application`,
             AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["oa/controllers:ResignationController"] = append(beego.GlobalControllerRouter["oa/controllers:ResignationController"],
+        beego.ControllerComments{
+            Method: "PassResignation",
+            Router: `/pass/:id`,
+            AllowHTTPMethods: []string{"put"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["oa/controllers:ResignationController"] = append(beego.GlobalControllerRouter["oa/controllers:ResignationController"],
+        beego.ControllerComments{
+            Method: "RejectResignation",
+            Router: `/reject/:id`,
+            AllowHTTPMethods: []string{"put"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})

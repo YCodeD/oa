@@ -283,22 +283,6 @@ paths:
           description: ""
         "403":
           description: ""
-  /reimbursement/{name}:
-    get:
-      tags:
-      - reimbursement
-      description: 获取报销记录
-      operationId: ReimbursementController.获取用户报销记录
-      parameters:
-      - in: path
-        name: name
-        description: 申请人
-        type: string
-      responses:
-        "200":
-          description: ""
-        "403":
-          description: ""
   /reimbursement/{option}:
     get:
       tags:
@@ -317,7 +301,7 @@ paths:
           description: ""
         "403":
           description: ""
-  /reimbursement/addreimbursement:
+  /reimbursement/add:
     post:
       tags:
       - reimbursement
@@ -334,7 +318,7 @@ paths:
           description: ""
         "403":
           description: ""
-  /reimbursement/allrecords:
+  /reimbursement/allReims:
     get:
       tags:
       - reimbursement
@@ -393,6 +377,42 @@ paths:
         description: 离职请求
         schema:
           $ref: '#/definitions/controllers.ResignationRequest'
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /resignation/pass/{id}:
+    put:
+      tags:
+      - resignation
+      description: 通过离职申请
+      operationId: ResignationController.通过离职申请
+      parameters:
+      - in: path
+        name: id
+        description: 离职申请id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: ""
+  /resignation/reject/{id}:
+    put:
+      tags:
+      - resignation
+      description: 拒绝离职申请
+      operationId: ResignationController.拒绝离职申请
+      parameters:
+      - in: path
+        name: id
+        description: 离职申请id
+        required: true
+        type: integer
+        format: int64
       responses:
         "200":
           description: ""

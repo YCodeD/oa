@@ -22,6 +22,7 @@ type Reimbursement struct {
 	Status int `json:"status" gorm:"default:0"`
 }
 
+
 // CreateReimbursement 添加报销申请
 func CreateReimbursement(cr *Reimbursement) error {
 	_, err := time.ParseInLocation("2006-01-02", cr.Date, time.Local)
@@ -30,6 +31,21 @@ func CreateReimbursement(cr *Reimbursement) error {
 	}
 	db.Create(&cr)
 	return nil
+}
+
+// FetchAllReimRecords 获取所有报销记录
+func FetchAllReimRecords() []Reimbursement {
+	res := []Reimbursement{}
+	db.Find(&res)
+	return res
+}
+
+// FetchReimById 通过id获取用户报销记录
+func FetchReimById(id int) *Reimbursement {
+	res := Reimbursement{}
+	db.Where("id=?", id).First(&res)
+	//fmt.Printf(" by id %v \n", res)
+	return &res
 }
 
 // UpdateReimbursement 更新报销记录
@@ -44,28 +60,5 @@ func FetchReimByOption(option int) []Reimbursement {
 	res := []Reimbursement{}
 	fmt.Printf("FetchByOption  \n")
 	db.Where("status=?", option).Find(&res)
-	return res
-}
-
-// FetchReimByName 通过名字获取用户报销记录
-func FetchReimByName(name string) []Reimbursement {
-	res := []Reimbursement{}
-	fmt.Printf("FetchByName  \n")
-	db.Where("applicant=?", name).Find(&res)
-	return res
-}
-
-// FetchReimById 通过id获取用户报销记录
-func FetchReimById(id int) *Reimbursement {
-	res := Reimbursement{}
-	db.Where("id=?", id).First(&res)
-	//fmt.Printf(" by id %v \n", res)
-	return &res
-}
-
-// FetchAllReimRecords 获取所有报销记录
-func FetchAllReimRecords() []Reimbursement {
-	res := []Reimbursement{}
-	db.Find(&res)
 	return res
 }

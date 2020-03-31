@@ -125,7 +125,6 @@ func (e *ExerciseController) ExerciseClock() {
 		Duration:     time.Duration(duration.Minutes()),
 		Date:         cr.Date,
 	}
-	//fmt.Printf("%#v\n", ec)
 
 	result := models.CreateClock(&ec)
 	e.Response(result)

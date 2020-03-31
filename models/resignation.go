@@ -35,12 +35,25 @@ func CreateResignation(res *Resignation) Resignation {
 	return *res
 }
 
-func FetchAll() (res []Resignation) {
+func FetchAllResignation() (res []Resignation) {
 	db.Find(&res)
 	return res
 }
 
-func FetchByName(name string) (res []Resignation) {
+func FetchResignByName(name string) (res []Resignation) {
 	db.Where("applicant_name=?", name).Find(&res)
 	return res
+}
+
+func FetchResignById(id int) (res Resignation) {
+	db.Where("id=?", id).First(&res)
+	return res
+}
+
+func UpdateResignation(ur Resignation) error {
+	err := db.Update(&ur).Error
+	if err != nil {
+		return err
+	}
+	return nil
 }
