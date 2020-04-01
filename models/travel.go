@@ -15,8 +15,31 @@ type Travel struct {
 	Status int `json:"status" gorm:"default:0"`
 }
 
-// 添加出游申请
+// CreateTravel 添加出游申请
 func CreateTravel(ct *Travel) Travel {
 	db.Create(&ct)
 	return *ct
+}
+
+// FetchTravelById 通过id获取出游申请记录
+func FetchTravelById(id int) Travel{
+	var res Travel
+	db.Where("id=?", id).First(&res)
+	return res
+}
+
+// UpdateTravel 更新出游申请
+func UpdateTravel(ut *Travel) error {
+	err := db.Save(&ut).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+//FetchTravelByOption 通过选项获取出游申请
+func FetchTravelByOption(option int) []Travel {
+	res := []Travel{}
+	db.Where("status=?", option).Find(&res)
+	return res
 }

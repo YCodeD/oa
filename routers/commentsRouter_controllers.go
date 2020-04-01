@@ -72,6 +72,15 @@ func init() {
 
     beego.GlobalControllerRouter["oa/controllers:BirthdayController"] = append(beego.GlobalControllerRouter["oa/controllers:BirthdayController"],
         beego.ControllerComments{
+            Method: "GetBirthByOption",
+            Router: `/:option`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["oa/controllers:BirthdayController"] = append(beego.GlobalControllerRouter["oa/controllers:BirthdayController"],
+        beego.ControllerComments{
             Method: "AddBirthday",
             Router: `/addbirthday`,
             AllowHTTPMethods: []string{"post"},
@@ -198,6 +207,15 @@ func init() {
 
     beego.GlobalControllerRouter["oa/controllers:ResignationController"] = append(beego.GlobalControllerRouter["oa/controllers:ResignationController"],
         beego.ControllerComments{
+            Method: "GetResignationByOption",
+            Router: `/:option`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["oa/controllers:ResignationController"] = append(beego.GlobalControllerRouter["oa/controllers:ResignationController"],
+        beego.ControllerComments{
             Method: "AddApplication",
             Router: `/application`,
             AllowHTTPMethods: []string{"post"},
@@ -252,9 +270,36 @@ func init() {
 
     beego.GlobalControllerRouter["oa/controllers:TravelController"] = append(beego.GlobalControllerRouter["oa/controllers:TravelController"],
         beego.ControllerComments{
+            Method: "GetTravelByOption",
+            Router: `/:option`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["oa/controllers:TravelController"] = append(beego.GlobalControllerRouter["oa/controllers:TravelController"],
+        beego.ControllerComments{
             Method: "AddTravel",
             Router: `/addtravel`,
             AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["oa/controllers:TravelController"] = append(beego.GlobalControllerRouter["oa/controllers:TravelController"],
+        beego.ControllerComments{
+            Method: "PassTravel",
+            Router: `/pass/:id`,
+            AllowHTTPMethods: []string{"put"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["oa/controllers:TravelController"] = append(beego.GlobalControllerRouter["oa/controllers:TravelController"],
+        beego.ControllerComments{
+            Method: "RejectTravel",
+            Router: `/reject/:id`,
+            AllowHTTPMethods: []string{"put"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
@@ -264,6 +309,15 @@ func init() {
             Method: "GetVehicleRecords",
             Router: `/:name`,
             AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["oa/controllers:VehicleController"] = append(beego.GlobalControllerRouter["oa/controllers:VehicleController"],
+        beego.ControllerComments{
+            Method: "GetVehicleByOption",
+            Router: `/:option`,
+            AllowHTTPMethods: []string{"get"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})

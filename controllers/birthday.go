@@ -61,3 +61,15 @@ func (b *BirthdayController) RejectBirthday() {
 	res := models.UpdateBirthday(birth)
 	b.Response(res)
 }
+
+// @Title 通过选项获取庆生申请
+// @Description 通过选项获取庆生申请
+// @Param option path int false "0-未审批 1-通过 2-未通过"
+// @Seccess 200
+// @Failure 403
+// @router /:option [get]
+func (b *BirthdayController) GetBirthByOption() {
+	option := b.GetPathInt("option")
+	res := models.FetchBirthdayByOption(option)
+	b.Response(res)
+}

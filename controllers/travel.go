@@ -42,3 +42,47 @@ func (t *TravelController) AddTravel() {
 
 	t.Response(res)
 }
+
+// @Title 通过出游申请
+// @Description 通过出游申请
+// @Param id path int false "出游申请id"
+// @Success 200
+// @Failure 403
+// @router /pass/:id [put]
+func (t *TravelController) PassTravel() {
+	id := t.GetPathInt("id")
+	res := models.FetchTravelById(id)
+	res.Status = 1
+	err := models.UpdateTravel(&res)
+	if err != nil {
+		t.ResponseError(err)
+	}
+}
+
+// @Title 拒绝出游申请
+// @Description 拒绝出游申请
+// @Param id path int false "出游申请id"
+// @Success 200
+// @Failure 403
+// @router /reject/:id [put]
+func (t *TravelController) RejectTravel() {
+	id := t.GetPathInt("id")
+	res := models.FetchTravelById(id)
+	res.Status = 2
+	err := models.UpdateTravel(&res)
+	if err != nil {
+		t.ResponseError(err)
+	}
+}
+
+// @Title 通过选项获取出游申请
+// @Description 通过选项获取出游申请
+// @Param option path int false "0-未审批 1-通过 2-未通过"
+// @Success 200
+// @Failure 403
+// @router /:option [get]
+func (t *TravelController) GetTravelByOption() {
+	option := t.GetPathInt("option")
+	res := models.FetchTravelByOption(option)
+	t.Response(res)
+}

@@ -2,15 +2,15 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"oa/models"
 )
 
-// 经费报销
+// ReimbursementController 经费报销
 type ReimbursementController struct {
 	BaseController
 }
 
+// ReimRequest 添加报销申请请求
 type ReimRequest struct {
 	Applicant string `json:"applicant"`
 	Sum int `json:"sum"`
@@ -86,7 +86,8 @@ func (r *ReimbursementController) RejectReimbursement() {
 // @router /:option [get]
 func (r *ReimbursementController) GetByOption() {
 	option := r.GetPathInt("option")
-	fmt.Printf("option: %#v \n", option)
+	//fmt.Printf("option: %#v \n", option)
 	res := models.FetchReimByOption(option)
 	r.Response(res)
 }
+

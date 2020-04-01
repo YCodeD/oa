@@ -81,3 +81,15 @@ func (v *VehicleController) RejectVehicle() {
 	res := models.UpdateVehicle(&vehicle)
 	v.Response(res)
 }
+
+// @Title 通过选项获取车辆申请记录
+// @Description 通过选项获取车辆申请记录
+// @Param option path int false "0-未审批 1-通过 2-未通过"
+// @Success 200
+// @Failure 403
+// @router /:option [get]
+func (v *VehicleController) GetVehicleByOption() {
+	option := v.GetPathInt("option")
+	res := models.FetchVehicleByOption(option)
+	v.Response(res)
+}

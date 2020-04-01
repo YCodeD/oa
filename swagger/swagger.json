@@ -270,6 +270,29 @@
                 }
             }
         },
+        "/birthday/{option}": {
+            "get": {
+                "tags": [
+                    "birthday"
+                ],
+                "description": "通过选项获取庆生申请",
+                "operationId": "BirthdayController.通过选项获取庆生申请",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "option",
+                        "description": "0-未审批 1-通过 2-未通过",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/exercise/createteam": {
             "post": {
                 "tags": [
@@ -564,7 +587,7 @@
                     "resignation"
                 ],
                 "description": "离职申请",
-                "operationId": "ResignationController.离职申请",
+                "operationId": "ResignationController.添加离职申请",
                 "parameters": [
                     {
                         "in": "body",
@@ -625,6 +648,32 @@
                         "name": "id",
                         "description": "离职申请id",
                         "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/resignation/{option}": {
+            "get": {
+                "tags": [
+                    "resignation"
+                ],
+                "description": "通过选项获取离职申请",
+                "operationId": "ResignationController.通过选项获取离职申请",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "option",
+                        "description": "0-未审核 1-通过 2-未通过",
                         "type": "integer",
                         "format": "int64"
                     }
@@ -746,6 +795,84 @@
                 }
             }
         },
+        "/travel/pass/{id}": {
+            "put": {
+                "tags": [
+                    "travel"
+                ],
+                "description": "通过出游申请",
+                "operationId": "TravelController.通过出游申请",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "出游申请id",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/travel/reject/{id}": {
+            "put": {
+                "tags": [
+                    "travel"
+                ],
+                "description": "拒绝出游申请",
+                "operationId": "TravelController.拒绝出游申请",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "出游申请id",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/travel/{option}": {
+            "get": {
+                "tags": [
+                    "travel"
+                ],
+                "description": "通过选项获取出游申请",
+                "operationId": "TravelController.通过选项获取出游申请",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "option",
+                        "description": "0-未审批 1-通过 2-未通过",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/vehicle/application": {
             "post": {
                 "tags": [
@@ -838,6 +965,32 @@
                         "name": "name",
                         "description": "申请人",
                         "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/vehicle/{option}": {
+            "get": {
+                "tags": [
+                    "vehicle"
+                ],
+                "description": "通过选项获取车辆申请记录",
+                "operationId": "VehicleController.通过选项获取车辆申请记录",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "option",
+                        "description": "0-未审批 1-通过 2-未通过",
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -1020,7 +1173,7 @@
         },
         {
             "name": "reimbursement",
-            "description": "经费报销\n"
+            "description": "ReimbursementController 经费报销\n"
         },
         {
             "name": "vehicle",

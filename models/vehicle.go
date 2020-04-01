@@ -40,3 +40,10 @@ func FetchVehicleById(id int) Vehicle {
 	db.Where("id=?", id).First(&res)
 	return res
 }
+
+// FetchVehicleByOption 通过选项获取用车申请
+func FetchVehicleByOption(option int) []Vehicle {
+	res := []Vehicle{}
+	db.Where("status=?", option).Find(&res)
+	return res
+}

@@ -14,22 +14,29 @@ type Birthday struct {
 	Status int `json:"status" gorm:"default:0"`
 }
 
-// 添加生日申请
+// CreateBirthday 添加庆生申请
 func CreateBirthday(cb *Birthday) Birthday {
 	db.Create(&cb)
 	return *cb
 }
 
-// 更新生日申请
+// UpdateBirthday 更新庆生申请
 func UpdateBirthday(ub *Birthday) Birthday {
 	db.Save(&ub)
 	return *ub
 }
 
-// 通过id获取
+// FetchBirthdayById 通过id获取庆生申请
 func FetchBirthdayById(id int) *Birthday {
 	res := Birthday{}
 	db.Where("id=?", id).First(&res)
 	fmt.Printf("%v \n", res)
 	return &res
+}
+
+// FetchBirthdayByOption 通过选项获取庆生申请
+func FetchBirthdayByOption(option int) []Birthday {
+	res := []Birthday{}
+	db.Where("status=?", option).Find(&res)
+	return res
 }

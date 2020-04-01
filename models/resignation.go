@@ -1,5 +1,10 @@
 package models
 
+import (
+	"errors"
+	"time"
+)
+
 type Resignation struct {
 	ID int `json:"id"`
 	// 申请人
@@ -19,41 +24,38 @@ type Resignation struct {
 }
 
 // CreateResignation 添加离职申请
-func CreateResignation(res *Resignation) Resignation {
-	//ad, _ := time.ParseInLocation("2006-01-02", res.ApplicationDate, time.Local)
-	//et, _ := time.ParseInLocation("2006-01-02", res.EntryTime, time.Local)
-	//rt, _ := time.ParseInLocation("2006-01-02", res.ResignationTime, time.Local)
-
-	//tx := db.Begin()
-	//err := tx.Create(&res).Error
-	//if err != nil {
-	//	fmt.Printf("%v \n", err)
-	//	tx.Rollback()
-	//}
-	//tx.Commit()
-	db.Create(&res)
-	return *res
+func CreateResignation(cr *Resignation) error {
+	_, err1 := time.ParseInLocation("2006-01-02", cr.ApplicationDate, time.Local)
+	_, err2 := time.ParseInLocation("2006-01-02", cr.ResignationDate, time.Local)
+	if err2 != nil || err1 != nil {
+		return errors.New("ResignationDate or ApplicationDate必须是2006-01-02的时间格式")
+	}
+	db.Create(&cr)
+	return nil
 }
 
+// FetchAllResignation 获取所有离职申请
 func FetchAllResignation() (res []Resignation) {
 	db.Find(&res)
 	return res
 }
 
-func FetchResignByName(name string) (res []Resignation) {
-	db.Where("applicant_name=?", name).Find(&res)
-	return res
-}
-
-func FetchResignById(id int) (res Resignation) {
+// FetchResignationById 通过id获取离职申请
+func FetchResignById(id int) *Resignation {
+	res := Resignation{}
 	db.Where("id=?", id).First(&res)
-	return res
+	return &res
 }
 
-func UpdateResignation(ur Resignation) error {
-	err := db.Update(&ur).Error
-	if err != nil {
-		return err
-	}
-	return nil
+// UpdateResignation 更新离职申请
+func UpdateResignation(ur *Resignation) Resignation {
+	db.Save(&ur)
+	return *ur
+}
+
+// FetchResignationByOption 通过选项获取离职申请
+func FetchResignationByOption(option int) []Resignation {
+	res := []Resignation{}
+	db.Where("status=?", option).Find(&res)
+	return res
 }
