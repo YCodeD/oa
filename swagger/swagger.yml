@@ -760,7 +760,7 @@ definitions:
 tags:
 - name: Announcement
   description: |
-    Announcement 公告控制器
+    AnnouncementController 公告控制器
 - name: exercise
   description: |
     ExerciseController 锻炼小组控制器

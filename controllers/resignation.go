@@ -5,12 +5,13 @@ import (
 	"oa/models"
 )
 
-// 离职
+// ResignationController 离职申请
 type ResignationController struct {
 	BaseController
 }
 
-// Reignation 添加离职请求
+
+// ResignationRequest 添加离职请求
 type ResignationRequest struct {
 	// 申请人
 	Name string `json:"name"`
@@ -26,6 +27,7 @@ type ResignationRequest struct {
 	Reason string `json:"reason"`
 }
 
+// AddApplication 添加方法
 // @Title 添加离职申请
 // @Description 离职申请
 // @Param body body controllers.ResignationRequest "离职请求"
@@ -49,6 +51,7 @@ func (r *ResignationController) AddApplication() {
 
 }
 
+// PassResignation 通过方法
 // @Title 通过离职申请
 // @Description 通过离职申请
 // @Param id path int true "离职申请id"
@@ -63,6 +66,7 @@ func (r *ResignationController) PassResignation () {
 	r.Response(res)
 }
 
+// RejectResignation 拒绝方法
 // @Title 拒绝离职申请
 // @Description 拒绝离职申请
 // @Param id path int true "离职申请id"
@@ -77,6 +81,7 @@ func (r *ResignationController) RejectResignation () {
 	r.Response(res)
 }
 
+// GetResignationByOption 获取方法
 // @Title 通过选项获取离职申请
 // @Description 通过选项获取离职申请
 // @Param option path int false "0-未审核 1-通过 2-未通过"

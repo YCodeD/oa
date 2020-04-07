@@ -60,7 +60,6 @@ func OutTeam(uid int, tid int) {
 	db.Where("id=?", uid).First(&m)
 	db.Where("id=?", tid).First(&t)
 
-	//m.GroupID = 0
 	count := t.Count - 1
 	db.Model(&m).Update("group_id", 0)
 	db.Model(&t).Update("count", count)

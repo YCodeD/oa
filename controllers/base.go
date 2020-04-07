@@ -1,11 +1,12 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
 	"strconv"
+
+	"github.com/astaxie/beego"
 )
 
-// 基础控制器
+// BaseController 基础控制器
 type BaseController struct {
 	beego.Controller
 }
@@ -42,7 +43,7 @@ func (c *BaseController) Response(ps ...interface{}) {
 	c.StopRun()
 }
 
-// ResponseError响应错误
+// ResponseError 响应错误
 func (c *BaseController) ResponseError(ps ...interface{}) *BaseController {
 	switch len(ps) {
 	case 2:

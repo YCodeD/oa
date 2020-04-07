@@ -3,8 +3,9 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"oa/models"
 	"time"
+
+	"oa/models"
 )
 
 // ExerciseController 锻炼小组控制器
@@ -12,11 +13,13 @@ type ExerciseController struct {
 	BaseController
 }
 
+// CreateRequest 添加请求
 type CreateRequest struct {
 	GroupName string `json:"groupname"`
 	Count     int    `json:"count"`
 }
 
+// CreateTeam 创建方法
 // @Title 创建队伍
 // @Description 创建队伍
 // @Param body body controllers.CreateRequest "创建请求"
@@ -34,6 +37,7 @@ func (e *ExerciseController) CreateTeam() {
 	models.CreateTeam(&eg)
 }
 
+// JionTeam 加入方法
 // @Title 加入队伍
 // @Description 加入队伍请求
 // @Param uid path int false "加入队伍用户的id"
@@ -48,6 +52,7 @@ func (e *ExerciseController) JionTeam() {
 	models.JoinTeam(iu, it)
 }
 
+// OutTeam 取消组队方法
 // @Title 取消组队
 // @Description 取消组队
 // @Param uid path int false "取消组队的用户id"
@@ -62,6 +67,7 @@ func (e *ExerciseController) OutTeam() {
 	models.OutTeam(iu, it)
 }
 
+// GetRecords 获取记录方法
 // @Title 获取记录
 // @Description 获取打卡记录
 // @Param name path string true 用户名
@@ -75,10 +81,12 @@ func (e *ExerciseController) GetRecords() {
 	records := models.GetRecords(username)
 	e.Response(records)
 }
-func (e *ExerciseController) URLMapping() {
-	e.Mapping("get", e.GetRecords)
-}
 
+// func (e *ExerciseController) URLMapping() {
+// 	e.Mapping("get", e.GetRecords)
+// }
+
+// GetGroupList 获取队伍方法
 // @Title 获取队伍列表
 // @Description 获取队伍列表
 // @Success 200
@@ -100,6 +108,7 @@ type ClockRequest struct {
 	Date         string `json:"date"`
 }
 
+// ExerciseClock 打卡方法
 // @Title 锻炼打卡
 // @Description 锻炼打卡
 // @Param body body controllers.ClockRequest 打卡请求

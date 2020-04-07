@@ -3,13 +3,16 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+
 	"oa/models"
 )
 
-// 教育培训
+// TrainingController 教育培训
 type TrainingController struct {
 	BaseController
 }
+
+// AddTrainingRequest 添加请求体
 type AddTrainingRequest struct {
 	DataName  string `json:"data_name"`
 	Publisher string `json:"publisher"`
@@ -18,6 +21,7 @@ type AddTrainingRequest struct {
 	Users     string `json:"users"`
 }
 
+// AddTraining 添加方法
 //@Title 添加培训
 //@Description 添加培训
 //@Param req formData string false "添加请求"
@@ -74,23 +78,25 @@ func (t *TrainingController) AddTraining() {
 	}
 }
 
+// GetAllTraining 获取方法
 //@Title 获取所有资料
 //@Description 获取所有培训资料
 //@Success 200
 //@Failure 403
 //@router /getalldata [get]
-func(t *TrainingController) GetAllTraining() {
+func (t *TrainingController) GetAllTraining() {
 	res := models.FetchAllTraining()
 	t.Response(res)
 }
 
+// DeleteTraining 删除方法
 //@Title 删除资料
 //@Description 删除培训资料
 //@Param id path int false "所删除资料的id"
 //@Success 200
 //@Failure 403
 //@router /:id [delete]
-func(t *TrainingController) DeleteTraining() {
+func (t *TrainingController) DeleteTraining() {
 	id := t.GetPathInt("id")
 	err := models.DeleteTrain(id)
 	if err != nil {

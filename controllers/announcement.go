@@ -3,23 +3,25 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"oa/models"
 	"strconv"
 	"time"
+
+	"oa/models"
 )
 
-// Announcement 公告控制器
+// AnnouncementController 公告控制器
 type AnnouncementController struct {
 	BaseController
 }
 
-// 添加公告请求
+// AddRequest 添加公告请求
 type AddRequest struct {
 	Title     string `json:"title" validate:"required"`
 	Publisher string `json:"publisher"`
 	Content   string `json:"content" validate:"required"`
 }
 
+// AddAnnouncement 添加公告方法
 // @Title 添加公告
 // @Description 添加公告
 // @Param req formData string false "增加请求(json格式字符串)"
@@ -75,6 +77,7 @@ func (a *AnnouncementController) AddAnnouncement() {
 	}
 }
 
+// GetAllAnnouncement 获取公告方法
 // @Title 获取所有公告
 // @Description 获取所有公告
 // @Success 200
@@ -88,6 +91,7 @@ func (a *AnnouncementController) GetAllAnnouncement() {
 	a.Response(ans)
 }
 
+// GetAnnouncement 获取单个公告方法
 // @Title 获取单个公告
 // @Description 获取单个公告
 // @Param aid path int false "获取单个公告的id"
@@ -103,6 +107,7 @@ func (a *AnnouncementController) GetAnnouncement() {
 	a.Response(an)
 }
 
+// GetReadAnnouncement 获取已读公告
 // @Title 获取已读公告
 // @Description 获取已读公告
 // @Success 200
@@ -116,7 +121,8 @@ func (a *AnnouncementController) GetReadAnnouncement() {
 	a.Response(an)
 }
 
-// @Title 获取未读读公告
+// GetUnreadAnnouncement 获取未读公告
+// @Title 获取未读公告
 // @Description 获取未读公告
 // @Success 200
 // @Failure 403 body is empty
@@ -136,6 +142,7 @@ type UpdateRequest struct {
 	Content   string `json:"content" validate:"required"`
 }
 
+// UpdateAnnouncement 更新公告方法
 // @Title Update Announcement
 // @Description 更新公告
 // @Param uid path int "更新公告id"
@@ -162,6 +169,7 @@ func (a *AnnouncementController) UpdateAnnouncement() {
 	a.Response(nan)
 }
 
+// DeleteAnnouncement 删除公告方法
 // @Title Delete
 // @Description 删除公告
 // @Param id path int false "删除公告id"

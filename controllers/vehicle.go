@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"encoding/json"
+
 	"oa/models"
 )
 
-// 车辆申请
+// VehicleController 车辆申请
 type VehicleController struct {
 	BaseController
 }
@@ -24,6 +25,7 @@ type ApplyRequest struct {
 	Record string `json:"record"`
 }
 
+// ApplyVehicle 添加方法
 // @Title 添加用车申请
 // @Description 添加用车申请
 // @Param body body controllers.ApplyRequest "申请请求"
@@ -42,6 +44,7 @@ func (v *VehicleController) ApplyVehicle() {
 	})
 }
 
+// GetVehicleRecords 获取方法
 // @Title 获取用户申请记录
 // @Description 获取用户申请记录
 // @Param name path string "申请人"
@@ -54,6 +57,7 @@ func (v *VehicleController) GetVehicleRecords() {
 	v.Response(res)
 }
 
+// PassVehicle 通过方法
 // @Title 通过车辆申请
 // @Description 通过车辆申请
 // @Param id path int "车辆申请id"
@@ -68,6 +72,7 @@ func (v *VehicleController) PassVehicle() {
 	v.Response(res)
 }
 
+// RejectVehicle 拒绝方法
 // @Title 拒绝车辆申请
 // @Description 拒绝车辆申请
 // @Param id path int "车辆申请id"
@@ -82,6 +87,7 @@ func (v *VehicleController) RejectVehicle() {
 	v.Response(res)
 }
 
+// GetVehicleByOption 获取方法
 // @Title 通过选项获取车辆申请记录
 // @Description 通过选项获取车辆申请记录
 // @Param option path int false "0-未审批 1-通过 2-未通过"

@@ -1,14 +1,21 @@
 package models
 
 type Training struct {
-	ID        int    `json:"id"`
-	DataName  string `json:"data_name"`
+	ID int `json:"id"`
+	// 资料名称
+	DataName string `json:"data_name"`
+	// 发布者
 	Publisher string `json:"publisher"`
-	Date      string `json:"date"`
-	Content   string `json:"content"`
-	Users     string `json:"users"`
-	Image     string `json:"image"`
-	File      string `json:"file"`
+	// 发布日期
+	Date string `json:"date"`
+	// 内容
+	Content string `json:"content"`
+	// 使用者
+	Users string `json:"users"`
+	// 图片地址
+	Image string `json:"image"`
+	// 文件地址
+	File string `json:"file"`
 }
 
 // 添加培训资料

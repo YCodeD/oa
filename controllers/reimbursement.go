@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+
 	"oa/models"
 )
 
@@ -13,12 +14,13 @@ type ReimbursementController struct {
 // ReimRequest 添加报销申请请求
 type ReimRequest struct {
 	Applicant string `json:"applicant"`
-	Sum int `json:"sum"`
-	UseFor string `json:"use_for"`
-	Date string `json:"date"`
-	Record string `json:"record"`
+	Sum       int    `json:"sum"`
+	UseFor    string `json:"use_for"`
+	Date      string `json:"date"`
+	Record    string `json:"record"`
 }
 
+// AddReim 添加方法
 // @Title 添加经费申请
 // @Description 添加经费申请
 // @Param body body controllers.ReimRequest "申请请求"
@@ -40,6 +42,7 @@ func (r *ReimbursementController) AddReim() {
 	}
 }
 
+// GetAllReims 获取记录方法
 // @Title 获取所有报销记录
 // @Description 获取报销记录
 // @Success 200
@@ -50,6 +53,7 @@ func (r *ReimbursementController) GetAllReims() {
 	r.Response(res)
 }
 
+// PassReimbursement 通过方法
 // @Title 通过报销申请
 // @Description 通过报销申请
 // @Param id path int true "通过申请id"
@@ -64,6 +68,7 @@ func (r *ReimbursementController) PassReimbursement() {
 	r.Response(res)
 }
 
+// RejectReimbursement 拒绝方法
 // @Title 拒绝报销申请
 // @Description 拒绝报销申请
 // @Param id path int true "拒绝申请id"
@@ -78,6 +83,7 @@ func (r *ReimbursementController) RejectReimbursement() {
 	r.Response(res)
 }
 
+// GetByOption 获取方法
 // @Title 获取报销申请
 // @Description 获取审批流程的报销申请
 // @Param option path int true "审批选项 0-未审批  1-已通过  2-未通过"
@@ -90,4 +96,3 @@ func (r *ReimbursementController) GetByOption() {
 	res := models.FetchReimByOption(option)
 	r.Response(res)
 }
-

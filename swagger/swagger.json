@@ -1161,7 +1161,7 @@
     "tags": [
         {
             "name": "Announcement",
-            "description": "Announcement 公告控制器\n"
+            "description": "AnnouncementController 公告控制器\n"
         },
         {
             "name": "exercise",

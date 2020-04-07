@@ -2,15 +2,16 @@ package controllers
 
 import (
 	"encoding/json"
+
 	"oa/models"
 )
 
-// 出游申请
+// TravelController 出游申请
 type TravelController struct {
 	BaseController
 }
 
-// 出游请求
+// TravelRequest 添加请求体
 type TravelRequest struct {
 	Name string `json:"name"`
 	// 目的地
@@ -23,6 +24,7 @@ type TravelRequest struct {
 	StaffList string `json:"staff_list"`
 }
 
+// AddTravel 添加方法
 // @Title 添加出游申请
 // @Description 添加出游申请
 // @Param body body controllers.TravelRequest "出游请求"
@@ -43,6 +45,7 @@ func (t *TravelController) AddTravel() {
 	t.Response(res)
 }
 
+// PassTravel 通过方法
 // @Title 通过出游申请
 // @Description 通过出游申请
 // @Param id path int false "出游申请id"
@@ -59,6 +62,7 @@ func (t *TravelController) PassTravel() {
 	}
 }
 
+// RejectTravel 拒绝方法
 // @Title 拒绝出游申请
 // @Description 拒绝出游申请
 // @Param id path int false "出游申请id"
@@ -75,6 +79,7 @@ func (t *TravelController) RejectTravel() {
 	}
 }
 
+// GetTravelByOption 获取方法
 // @Title 通过选项获取出游申请
 // @Description 通过选项获取出游申请
 // @Param option path int false "0-未审批 1-通过 2-未通过"
