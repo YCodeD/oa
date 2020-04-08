@@ -3,6 +3,9 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"path"
+
+	"os"
 	"strconv"
 	"time"
 
@@ -20,6 +23,8 @@ type AddRequest struct {
 	Publisher string `json:"publisher"`
 	Content   string `json:"content" validate:"required"`
 }
+
+//{"titile":"标题","publisher":"发布者","content":"内容"}
 
 // AddAnnouncement 添加公告方法
 // @Title 添加公告
@@ -43,10 +48,30 @@ func (a *AnnouncementController) AddAnnouncement() {
 	img, imgHead, err := a.GetFile("image")
 	if img != nil {
 		defer img.Close()
-		// 上传图片路径 "./upload/imgs/"
+		// 限定文件格式
+		ext := path.Ext(imgHead.Filename)
+		if ext != ".jpg" && ext != ".png" && ext != ".jpeg" {
+			a.ResponseError("上传图片格式错误，需上传jpg,jpeg,png格式")
+		}
+		// 限定文件大小可用 imgHead.Size
+
+		// 上传图片路径
+		rootPath := "./upload/announcement/images"
+		// 判断路径是否存在
+		exist := a.IsExist(rootPath)
+		if exist == false {
+			err := os.MkdirAll(rootPath, os.ModePerm)
+			if err != nil {
+				fmt.Println("./upload/announcement/images mkdir error")
+				a.ResponseError(err)
+			}
+		}
+
+		// 对文件重命名，防止文件名重复
+		imgName := time.Now().Format("2006-01-02-15-04-05") + ext
 		// 上传图片文件
-		a.SaveToFile("image", "./upload/announcement/images/"+imgHead.Filename)
-		imgPath = "./upload/announcement/imgs/" + imgHead.Filename
+		a.SaveToFile("image", "./upload/announcement/images/"+imgName)
+		imgPath = "./upload/announcement/images/" + imgName
 	} else {
 		imgPath = ""
 	}
@@ -55,11 +80,21 @@ func (a *AnnouncementController) AddAnnouncement() {
 	file, fileHead, err := a.GetFile("file")
 	if file != nil {
 		defer file.Close()
-		//上传文件路径 "./upload/file/"
-		//上传附件文件
-		//fmt.Println("附件路径" + uploadFilePath + filehead.Filename)
-		a.SaveToFile("file", "./upload/announcement/files/"+fileHead.Filename)
-		filePath = "./upload/announcement/file/" + fileHead.Filename
+		// 上传文件路径
+		rootPath := "./upload/announcement/files"
+		// 判断路径是否存在
+		exist := a.IsExist(rootPath)
+		if exist == false {
+			err := os.MkdirAll(rootPath, os.ModePerm)
+			if err != nil {
+				fmt.Println("./upload/announcement/files mkdir error")
+				a.ResponseError(err)
+			}
+		}
+		// 重命名
+		fileName := time.Now().Format("2006-01-02-15-04-05") + path.Ext(fileHead.Filename)
+		a.SaveToFile("file", "./upload/announcement/files/"+fileName)
+		filePath = "./upload/announcement/files/" + fileName
 	} else {
 		filePath = ""
 	}

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"os"
 	"strconv"
 
 	"github.com/astaxie/beego"
@@ -69,4 +70,24 @@ func (c *BaseController) GetPathInt(v string) int {
 	i, _ := strconv.Atoi(r)
 	//fmt.Printf("2 %#v\n", i)
 	return i
+}
+
+// IsExist 判断路径是否存在
+func (c *BaseController) IsExist(path string) bool {
+	_, err := os.Stat(path)
+
+	// err = nil 文件或文件夹存在
+	if err != nil {
+		// IsExist 返回true说明文件或文件夹存在
+		if os.IsExist(err) {
+			return true
+		}
+		// IsNotExist 返回true说明文件或文件夹不存在
+		if os.IsNotExist(err) {
+			return false
+		}
+		beego.Info(err)
+		return false
+	}
+	return true
 }

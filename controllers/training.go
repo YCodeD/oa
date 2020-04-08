@@ -3,8 +3,12 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+	"path"
+	"time"
 
 	"oa/models"
+
 )
 
 // TrainingController 教育培训
@@ -42,10 +46,26 @@ func (t *TrainingController) AddTraining() {
 	img, imgHead, _ := t.GetFile("image")
 	if img != nil {
 		defer img.Close()
-		// 上传图片路径 "./upload/imgs/"
+		// 限定图片格式
+		ext := path.Ext(imgHead.Filename)
+		if ext != ".jpg" && ext != ".jpeg" && ext != ".png" {
+			t.ResponseError("上传图片格式错误，需上传jpg，jpeg，png格式")
+		}
+		// 上传图片路径
+		rootPath := "./upload/training/images/"
+		// 判断路径是否存在
+		exist := t.IsExist(rootPath)
+		if exist == false {
+			err := os.MkdirAll(rootPath, os.ModePerm)
+			if err != nil {
+				t.ResponseError(err)
+			}
+		}
+		// 重命名
+		imgName := time.Now().Format("2006-01-02-15-04-05") + ext
 		// 上传图片文件
-		t.SaveToFile("image", "./upload/training/images/"+imgHead.Filename)
-		imgPath = "./upload/training/imgs/" + imgHead.Filename
+		t.SaveToFile("image", "./upload/training/images/"+imgName)
+		imgPath = "./upload/training/images/" + imgName
 	} else {
 		imgPath = ""
 	}
@@ -54,11 +74,22 @@ func (t *TrainingController) AddTraining() {
 	file, fileHead, _ := t.GetFile("file")
 	if file != nil {
 		defer file.Close()
-		//上传文件路径 "./upload/file/"
-		//上传附件文件
-		//fmt.Println("附件路径" + uploadFilePath + filehead.Filename)
-		t.SaveToFile("file", "./upload/training/files/"+fileHead.Filename)
-		filePath = "./upload/training/file/" + fileHead.Filename
+		// 上传文件路径
+		rootPath := "./upload/training/files/"
+		// 判断路径是否存在
+		exist := t.IsExist(rootPath)
+
+		if exist == false {
+			err := os.MkdirAll(rootPath, os.ModePerm)
+			if err != nil {
+				t.ResponseError(err)
+			}
+		}
+		// 重命名
+		fileName := time.Now().Format("2006-01-02-15-04-05") + path.Ext(fileHead.Filename)
+
+		t.SaveToFile("file", "./upload/training/files/"+fileName)
+		filePath = "./upload/training/files/" + fileName
 	} else {
 		filePath = ""
 	}
